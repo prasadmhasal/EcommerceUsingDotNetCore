@@ -1,10 +1,17 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using EcommerceUsingDotNetCore.Context;
+using EcommerceUsingDotNetCore.Migrations;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceUsingDotNetCore.Controllers
 {
     public class DashboardController : Controller
     {
+        private readonly ApplicationDbContext db;
+        public DashboardController(ApplicationDbContext db) 
+        {
+            this.db = db;
+        }
         public IActionResult Index()
         {
             string user = HttpContext.Session.GetString("Email");
@@ -21,6 +28,30 @@ namespace EcommerceUsingDotNetCore.Controllers
         {
             return View();
         }
+
+        public IActionResult ViewCart(cart c) 
+        {
+            string user = HttpContext.Session.GetString("Email");
+            var data = db.Carts.Where(x => x.Suser == user);
+            if (data != null)
+            {
+                var view = db.Carts.ToList();
+                return View(view);
+            }
+            else
+            {
+                TempData["null"] = "No Product You have Added";
+            }
+            var totalprice = 0.0;
+            var data2 = db.Carts.Where(x => x.Suser == user);
+            foreach (var a in data2)
+            {
+                totalprice = totalprice + a.Price; 
+            }
+            TempData["TotalPrice"]= totalprice;
+            return View();
+        }
+
 
        
 

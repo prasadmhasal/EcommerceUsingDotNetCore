@@ -36,12 +36,34 @@
 
 }
 
-@if (TempData["sendemail"] != null)
+@if (@TempData["msg"] != null)
 {
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	<script>
-		toastr.success('@TempData["sendemail"]')
+		toastr.success('@TempData["msg"]')
+	</script>
+
+}
+
+
+@if (@TempData["Add"] != null)
+{
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script>
+		toastr.success(' @TempData["Add"]')
+	</script>
+
+}
+
+
+@if (@TempData["null"] != null)
+{
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script>
+		toastr.warning(' @TempData["null"]')
 	</script>
 
 }
