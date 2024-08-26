@@ -2,6 +2,7 @@
 using EcommerceUsingDotNetCore.Migrations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace EcommerceUsingDotNetCore.Controllers
 {
@@ -35,21 +36,22 @@ namespace EcommerceUsingDotNetCore.Controllers
             var data = db.Carts.Where(x => x.Suser == user);
             if (data != null)
             {
-                var view = db.Carts.ToList();
+               var  view = db.Carts.ToList();
+                var totalprice = 0.0;
+                var data2 = db.Carts.Where(x => x.Suser == user);
+                foreach (var a in data2)
+                {
+                    totalprice = totalprice + a.Price;
+                }
+                TempData["TotalPrice"] = totalprice;
                 return View(view);
             }
             else
             {
                 TempData["null"] = "No Product You have Added";
             }
-            var totalprice = 0.0;
-            var data2 = db.Carts.Where(x => x.Suser == user);
-            foreach (var a in data2)
-            {
-                totalprice = totalprice + a.Price; 
-            }
-            TempData["TotalPrice"]= totalprice;
             return View();
+            
         }
 
 

@@ -49,6 +49,7 @@ namespace EcommerceUsingDotNetCore.Controllers
                 if (us)
                 {
                     HttpContext.Session.SetString("Email",data.Email);
+                    HttpContext.Session.SetString("urole",data.Role);
                     TempData["login"] = "Successfully Login !!";
                     return RedirectToAction("Index", "Dashboard");
                 }

@@ -113,5 +113,13 @@ namespace EcommerceUsingDotNetCore.Controllers
         }
 
 
+        public ActionResult Payment()
+        {
+            return View();
+
+
+        }
+
+
     }
 }

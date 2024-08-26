@@ -15,6 +15,8 @@ namespace EcommerceUsingDotNetCore.Context
         public DbSet<Product> Product { get; set; }
         public DbSet<Cart> Carts { get; set; }
 
+        public DbSet<Payment> Payment { get; set; }
+
 
 
     }
